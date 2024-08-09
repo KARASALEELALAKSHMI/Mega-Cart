@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+    body{
+        background-image:url("sb1.jpg");
+        background-size:cover;
+        background-repeat: no-repeat;
+    }
+    #box{
+            margin-left: 10%;
+            margin-top: 10%;
+        }
+</style>
+</head>
+<body id="box">
+    <h1>Sign Up</h1>
+    <form id="signupForm">
+    <table>
+    <tr>
+        <td><label for="username">Username:</label></td>
+        <td><input type="text" id="username" name="username" required></td>
+    </tr>
+    <tr>
+        <td><label for="email">Email:</label></td>
+        <td><input type="email" id="email" name="email" required></td>
+    </tr>
+    <tr>
+        <td><label for="mobile">Mobile:</label></td>
+        <td><input type="text" id="mobile" name="mobile" required></td>
+    </tr>
+    <tr>
+        <td><label for="password">Password:</label></td>
+        <td><input type="password" id="password" name="password" required></td>
+    </tr>
+    <tr>
+        <td><label for="confirmPassword">Confirm Password:</label></td>
+        <td><input type="password" id="confirmPassword" name="confirmPassword" required></td>
+    </tr>
+    <tr>
+        <td><input type="submit" value="Sign Up"></td>
+    </tr>
+    </table>
+    </form>
+
+    <script>
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            // Get input values
+            var username = document.getElementById("username").value;
+            var email = document.getElementById("email").value;
+            var mobile = document.getElementById("mobile").value;
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+            
+            // Validate username length
+            if (username.length<6) {
+                alert("Length of Username must be greater than 6");
+                return;
+            }
+            
+            // Validate email format using regular expression
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert("Invalid email address.");
+                return;
+            }
+            
+            // Validate mobile number length
+            if (mobile.length !==10||isNaN(mobile)) {
+                alert("Mobile number must be exactly ten digits.");
+                return;
+            }
+            
+            // Validate password format using regular expression
+            var passwordPattern = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[\W_]).{8,}$/;
+            if (!passwordPattern.test(password)) {
+                alert("Password must contain at least one digit, one character, and one special character, and be at least 8 characters long.");
+                return;
+            }
+            
+            // Validate confirm password
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return;
+            }
+            // Store username and password in localStorage
+            var userData = {username:username, password:password};
+            localStorage.setItem("userData", JSON.stringify(userData));
+            // Redirect to login.html
+            window.location.href = "index.html";
+        });
+    </script>
+</body>
+</html>

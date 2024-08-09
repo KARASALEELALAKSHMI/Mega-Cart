@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retrieve Items from LocalStorage</title>
+    <style>
+        body{
+            background-image: url("o7.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
+    <script>
+        function logout(){
+            localStorage.clear();
+            sessionStorage.clear();
+            window.location.href="sighn-up.html";
+        }
+    </script>
+</head>
+<body>
+    <h1>Items</h1>
+    <ul id="itemsList"></ul>
+    <h3 id="totalPrice"></h3>
+    <button onclick="logout()">Logout</button>
+    <script>
+        // Function to retrieve items from localStorage and display them
+        function displayItems() {
+            // Retrieve the items from localStorage
+            var total = 0;
+            var items = JSON.parse(localStorage.getItem('items')) || [];
+
+            // Get the itemsList element
+            var itemsList = document.getElementById('itemsList');
+            var tot=document.getElementById('totalPrice');
+            // Clear any existing items in the list
+            itemsList.innerHTML = '';
+
+            // Loop through the items and display each one
+            items.forEach(function(item) {
+                var listItem = document.createElement('li');
+                listItem.textContent = `Item ${item.itemname}, Rs.${item.itemprice},will be delivered in ${item.daystodelivery} days!`;
+                itemsList.appendChild(listItem);
+                total += item.itemprice;
+            });
+            tot.textContent=`Total Cost:${total}`;
+        }
+
+        // Call the displayItems function to show the items on page load
+        
+        window.onload = displayItems;
+    </script>
+</body>
+</html>

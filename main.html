@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <style>
+        /* Style for the list */
+        ul {
+          list-style-type: none;
+          padding: 0;
+        }
+        /* Style for list items */
+        li {
+          display: inline; /* or inline-block */
+          margin-right: 10px; /* Add some spacing between items */
+        }
+        img{
+            width: 300px;
+            height: 300px;
+        }
+        .container {
+          display: inline-block;
+          margin-right: 10px;
+        }
+      </style>
+    <script>
+        function onclickimg(iname,iprice,idays){
+            // Display alert
+            alert("1 "+ iname +" item added");
+          // Creating item object
+          var item={
+            itemname:iname,
+            itemprice:iprice,
+            daystodelivery:idays,
+          };
+         // Retrieving existing items from localStorage
+         var items=JSON.parse(localStorage.getItem('items'))||[];
+         // Adding new item to the array
+          items.push(item);
+          // Storing updated items array back to localStorage
+          localStorage.setItem('items',JSON.stringify(items));
+        }
+        //function to logout
+        function logout(){
+            localStorage.clear();
+            sessionStorage.clear();
+
+            window.location.href="login.html";
+        }
+        // Display username in the heading
+    </script>
+</head>
+<body>
+  <div class="container" style="font-size: xx-large; font-weight: bold;",>
+    <script >
+      const data = localStorage.getItem('user');
+        document.write("Hello  "+data);  // Outputs: some data
+    </script>
+  </div>
+<div class="container">
+    <h1>Welcome to Mega Cart.....</h1>
+    </div>
+      <p>Please Click on an item to add it to the cart</p>
+      <div id="date"></div>
+<a href="#" onclick="logout()">Logout</a>  
+      <ul>
+        <li onclick="onclickimg('clothing', 1000, 5)">
+            <img src="clothing.jpg" alt="clothing">
+        </li>
+        <li onclick="onclickimg('beauty and health',500,4)">
+            <img src="health.jpg" alt="buty&health">
+        </li>
+        <li onclick="onclickimg('footwear',300,2)">
+            <img src="footwear.jpg" alt="footwear">
+        </li>
+        <li onclick="onclickimg('schoolbags',250,1)">
+            <img src="school.jpg" alt="school">
+        </li>
+      </ul>
+      <button onclick="window.location.href='buy-item.html'">Click Here to Cart</button>
+      <script>
+        // Function to display date
+        function displayDate() {
+            var now = new Date();
+            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            var formattedDate = months[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear();
+            document.getElementById('date').textContent = formattedDate;
+        }
+        // Call the function to display date
+        displayDate();
+    </script>
+</body>
+</html>

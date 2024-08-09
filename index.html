@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <style>
+        body{
+            background-image:url("b1.jpg");
+            background-size:cover;
+            background-repeat: no-repeat;
+        }
+        #box{
+            margin-left: 2%;
+            margin-top: 10%;
+        }
+    </style>
+</head>
+<body id="box">
+    <h1> Mega Cart</h1>
+    <form id="login">
+    <table>
+        <tr>
+            <td><label for="username">Enter username:<br>(Already sighned up/After signing up)</label></td>
+            <td><input type="text" id="username" name="username" required></td>
+        </tr>
+        <tr>
+            <td><label for="password">Enter password:</label></td>
+            <td><input type="password" id="password" name="password" required><br></td>
+        </tr>
+        <tr>
+          <td><input type="submit" value="login"></td>   
+        </tr>
+    </table>
+    </form>
+    <p>If you are new to login click on <a href="sighn-up.html">Sign Up</a></p>
+    <script>
+        document.getElementById("login").addEventListener("submit",function(event){
+            event.preventDefault();// Prevent form submission
+            // Get input values
+            var username=document.getElementById("username").value;
+            var password=document.getElementById("password").value;
+            // Get saved user data from localStorage
+            var saveduserdata=JSON.parse(localStorage.getItem("userData"));
+            // Check if user exists and password matches
+            if(saveduserdata&&saveduserdata.username===username&&saveduserdata.password===password){
+                // Redirect to main.html
+                localStorage.setItem('user',username);
+                window.location.href="main.html";
+                
+            }
+            else{
+                // Show alert for invalid data
+                alert("Invalid username or password please try again")
+            }
+        });
+    </script>
+</body>
+</html>
